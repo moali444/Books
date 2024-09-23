@@ -4,6 +4,7 @@ const initialState = {
   cartItems: [],
   amount: 0,
   total: 0,
+  book: "",
 };
 
 const CartSlice = createSlice({
@@ -11,6 +12,7 @@ const CartSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action) => {
+      console.log(action);
       state.amount++;
       const cartItem = state.cartItems.find(
         (cartItem) => cartItem._id === action.payload._id

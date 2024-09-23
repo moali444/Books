@@ -29,7 +29,7 @@ const AuthLayout = () => {
 
     return (
         <>
-            <MainLoader />
+            <MainLoader className="loader-spinner-bx" />
             <div className={styles.auth_layout_bx}>
                 <div className={styles.language_bx}>
                     <div className={styles.choose_lang}>

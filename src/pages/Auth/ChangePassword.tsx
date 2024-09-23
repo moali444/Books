@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { ChangePasswordForm } from "@components/index";
-import styles from "./Auth.module.scss";
 
 function ChangePassword() {
     const { t } = useTranslation();

@@ -1,9 +1,13 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { LoginForm } from '@components/index';
 import styles from './Auth.module.scss';
 
-const Login = ({saveLoginData}) => {
+interface LoginProps {
+    saveLoginData: (data: string) => void; 
+}
 
+const Login: React.FC<LoginProps> = ({ saveLoginData }) => {
     const { t } = useTranslation();
 
     return (
@@ -14,7 +18,7 @@ const Login = ({saveLoginData}) => {
             </div>
             <LoginForm saveLoginData={saveLoginData} />
         </section>
-    )
+    );
 }
 
-export default Login
+export default Login;

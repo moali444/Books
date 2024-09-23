@@ -3,7 +3,6 @@ import i18n from "i18next";
 import {
   RouterProvider,
   createBrowserRouter,
-  useNavigate,
 } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import AuthLayout from "./layouts/AuthLayout/AuthLayout";
@@ -14,11 +13,12 @@ import ResetPassword from "./pages/Auth/ResetPassword";
 import BaseLayout from "./layouts/BaseLayout/BaseLayout";
 import Home from "./pages/Home/Home";
 import AllProducts from "./pages/AllProducts/AllProducts";
-import Cart from "./pages/Cart/Cart";
+//import Cart from "./pages/Cart/Cart";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import CategoryDetails from "./pages/CategoryDetails/CategoryDetails";
 import Categories from "./pages/Categories/Categories";
-import ProtectedRoute from "@components/shared/ProtectedRoute/ProtectedRoute";
+import MyCart from "./pages/MyCart/MyCart";
+//import ProtectedRoute from "@components/shared/ProtectedRoute/ProtectedRoute";
 import LayoutProtectedRoute from "@components/shared/ProtectedRoute/LayoutProtectedRoute";
 import NotFound from "./pages/NotFound/NotFound";
 
@@ -40,10 +40,10 @@ const App = () => {
 
   const routes = createBrowserRouter([
     {
-      path: "/",
+      path: "/auth",
       element: (
-        <LayoutProtectedRoute loginData={loginData}>
-          <AuthLayout />
+        <LayoutProtectedRoute >
+          <AuthLayout loginData={loginData} />
         </LayoutProtectedRoute>
       ),
       //<AuthLayout /> ,
@@ -57,11 +57,12 @@ const App = () => {
       ],
     },
     {
-      path: "home",
+      path: "/",
       element: (
-        <ProtectedRoute loginData={loginData}>
-          <BaseLayout />
-        </ProtectedRoute>
+        // <ProtectedRoute >
+        //   <BaseLayout loginData={loginData} />
+        // </ProtectedRoute>
+        <BaseLayout loginData={loginData} />
       ),
       children: [
         { index: true, element: <Home /> },
@@ -69,7 +70,8 @@ const App = () => {
         { path: "all-products", element: <AllProducts /> },
         { path: "product-details/:_id", element: <ProductDetails /> },
         { path: "category-details/:_id", element: <CategoryDetails /> },
-        { path: "cart", element: <Cart /> },
+        //{ path: "cart", element: <Cart /> },
+        { path: "cart", element: <MyCart /> },
         { path: "categories", element: <Categories /> },
         { path: "*", element: <NotFound /> },
       ],

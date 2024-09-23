@@ -1,15 +1,15 @@
 import { PropsWithChildren, createContext, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
-export let AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 export default function AuthContextProvider(props:PropsWithChildren){
 
-    let [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState(null);
 
-    let saveUserData = () => {
-        let encodedToken = localStorage.getItem('userToken');
-        let decodedToken = jwtDecode(encodedToken);
+    const saveUserData = () => {
+        const encodedToken = localStorage.getItem('userToken');
+        const decodedToken = jwtDecode(encodedToken);
         setUserData(decodedToken);
     }
 

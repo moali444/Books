@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -7,12 +8,13 @@ import {
   BreadCrumb,
   Details,
   TotalCost,
-  ShippingData,
+  //ShippingData,
+  Items,
 } from "@components/index";
 import { total } from "src/redux/CartSlice";
-import "./Cart.scss";
+import './MyCart.scss';
 
-const Cart = () => {
+const MyCart = () => {
   const { t } = useTranslation();
   const {cartItems} = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -36,9 +38,15 @@ const Cart = () => {
           </Grid>
         </Grid>
 
-        <Grid container spacing={4}>
+        {/* <Grid container spacing={4}>
           <Grid item xs={12} md={12}>
             <ShippingData />
+          </Grid>
+        </Grid> */}
+
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={12}>
+            {/* <Items /> */}
           </Grid>
         </Grid>
       </section>
@@ -46,4 +54,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default MyCart;
