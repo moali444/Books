@@ -8,7 +8,7 @@ interface Item {
 function ProtectedRoute({loginData, children}: Item) {
   if(localStorage.getItem('userToken') || loginData) return children;
 
-  else return <Navigate to='/login' />
+  else return <Navigate to='/auth/login' />
 }
 
 export default ProtectedRoute

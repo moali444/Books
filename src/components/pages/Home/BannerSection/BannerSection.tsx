@@ -27,12 +27,8 @@ const BannerSection = () => {
                 <SwiperSlide>
                     <div className='slider_item'>
                         <div className='text'>
-                            <h3>ipsum dolor si</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet,
-                                libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend.
-                                Amet, quis urna, a eu.
-                            </p>
+                            <h3>{t('slider_title')}</h3>
+                            <p>{t('slider_text')}</p>
                             <Link to='/home' className='slider_btn'>
                                 {t('read_more')} <img src={IMAGES.rightArrow} alt='pic' />
                             </Link>
@@ -46,12 +42,8 @@ const BannerSection = () => {
                 <SwiperSlide>
                     <div className='slider_item'>
                         <div className='text'>
-                            <h3>ipsum dolor si</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet,
-                                libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend.
-                                Amet, quis urna, a eu.
-                            </p>
+                            <h3>{t('slider_title')}</h3>
+                            <p>{t('slider_text')}</p>
                             <Link to='/home' className='slider_btn'>
                                 {t('read_more')} <img src={IMAGES.rightArrow} alt='pic' />
                             </Link>
@@ -65,12 +57,8 @@ const BannerSection = () => {
                 <SwiperSlide>
                     <div className='slider_item'>
                         <div className='text'>
-                            <h3>ipsum dolor si</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet,
-                                libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend.
-                                Amet, quis urna, a eu.
-                            </p>
+                            <h3>{t('slider_title')}</h3>
+                            <p>{t('slider_text')}</p>
                             <Link to='/home' className='slider_btn'>
                                 {t('read_more')} <img src={IMAGES.rightArrow} alt='pic' />
                             </Link>
@@ -84,12 +72,8 @@ const BannerSection = () => {
                 <SwiperSlide>
                     <div className='slider_item'>
                         <div className='text'>
-                            <h3>ipsum dolor si</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet,
-                                libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend.
-                                Amet, quis urna, a eu.
-                            </p>
+                            <h3>{t('slider_title')}</h3>
+                            <p>{t('slider_text')}</p>
                             <Link to='/home' className='slider_btn'>
                                 {t('read_more')} <img src={IMAGES.rightArrow} alt='pic' />
                             </Link>

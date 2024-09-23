@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
@@ -12,7 +12,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { LanguageSwitch } from "@components/index";
 import IMAGES from "@assets/images/images";
 import ChangePassword from "src/pages/Auth/ChangePassword";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { showLoader, hideLoader } from "src/redux/loaderSlice";
 import "./UserMenu.scss";
 
 function UserMenu() {
@@ -25,6 +26,17 @@ function UserMenu() {
     setAnchorEl(event.currentTarget);
   };
   const [openPopup, setOpenPopup] = useState(false);
+  const [hasToken, setHasToken] = useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("userToken");
+    if (token) {
+      setHasToken(true);
+    } else {
+      setHasToken(false);
+    }
+  }, []);
 
   const handleClickOpen = () => {
     setOpenPopup(true);
@@ -36,79 +48,101 @@ function UserMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const fireLoader = () => {
+    dispatch(showLoader());
+
+    setTimeout(() => {
+    dispatch(hideLoader());
+    }, 800);
+  };
+
   const logout = () => {
     window.localStorage.clear();
-    navigate("/login");
+    window.location.reload();
+    fireLoader();
+    navigate("/");
   };
+
+  useEffect(() => {
+    fireLoader();
+  }, []);
 
   return (
     <>
       <div id="end_content">
-        <div className="item">
-          <Button
-            id="fade-button"
-            className="user_btn"
-            aria-controls={open ? "fade-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-          >
-            <img src={IMAGES.userIcon} alt="pic" />
-          </Button>
-          <Menu
-            id="fade-menu"
-            MenuListProps={{
-              "aria-labelledby": "fade-button",
-            }}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            TransitionComponent={Fade}
-          >
-            <MenuItem onClick={handleClose}>{t("profile")}</MenuItem>
-            <MenuItem onClick={handleClose}>
-              <div onClick={handleClickOpen}>{t("change password")}</div>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <button id="logout_btn" onClick={logout}>
-                {t("logout")}
-              </button>
-            </MenuItem>
-          </Menu>
-        </div>
+        {hasToken ? (
+          <>
+            <div className="item">
+              <Button
+                id="fade-button"
+                className="user_btn"
+                aria-controls={open ? "fade-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              >
+                <img src={IMAGES.userIcon} alt="pic" />
+              </Button>
+              <Menu
+                id="fade-menu"
+                MenuListProps={{
+                  "aria-labelledby": "fade-button",
+                }}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "right",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                TransitionComponent={Fade}
+              >
+                <MenuItem onClick={handleClose}>{t("profile")}</MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <div onClick={handleClickOpen}>{t("change_password")}</div>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <button id="logout_btn" onClick={logout}>
+                    {t("logout")}
+                  </button>
+                </MenuItem>
+              </Menu>
+            </div>
 
-        <Link
-          to="/home/cart"
-          onClick={() => {
-            window.scroll({
-              top: 0,
-              behavior: "smooth",
-            });
-          }}
-        >
-          <div className="item relative">
-            <img src={IMAGES.cartIcon} alt="pic" />
-            <div
-              className="
-                absolute w-4 h-4 rounded-full z-10 right-[-3px] bottom-[-6px] 
+            <Link
+              to="/cart"
+              onClick={() => {
+                window.scroll({
+                  top: 0,
+                  behavior: "smooth",
+                });
+              }}
+            >
+              <div className="item relative">
+                <img src={IMAGES.cartIcon} alt="pic" />
+                <div
+                  className="
+                  circle absolute w-4 h-4 rounded-full z-10 bottom-[-6px] 
                 flex items-center justify-center text-[10px] bg-[#EF6B4A] text-white
             "
-            >
-              {amount}
+                >
+                  {amount}
+                </div>
+              </div>
+            </Link>
+            <div className="item">
+              <img src={IMAGES.favIcon} alt="pic" />
             </div>
-          </div>
-        </Link>
-        <div className="item">
-          <img src={IMAGES.favIcon} alt="pic" />
-        </div>
+          </>
+        ) : (
+          <Link to='/auth/login'>login</Link>
+        )}
+
         <div className="item">
           <div className="choose_lang">
             <LanguageSwitch languageText="" />

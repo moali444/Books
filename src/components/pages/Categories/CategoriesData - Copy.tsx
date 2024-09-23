@@ -12,8 +12,7 @@ import catug5 from "../../../assets/images/png/categories/catug_drama.jpg";
 import catug6 from "../../../assets/images/png/categories/catug_story.jpg";
 import catug7 from "../../../assets/images/png/categories/catug_sport.jpg";
 import catug8 from "../../../assets/images/png/categories/catug_fantasy.jpg";
-//import { Box, Skeleton } from "@mui/material";
-import IMAGES from "@assets/images/images";
+import { Box, Skeleton } from "@mui/material";
 import "./CategoriesData.scss";
 
 // Define the type for a category
@@ -41,12 +40,15 @@ const images: Image[] = [
 ];
 
 const CategoriesData = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [categories, setCategories] = useState<Category[]>(
+    new Array(1).fill(undefined)
+  );
+  const [loader, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const getAllCategories = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(
         "https://upskilling-egypt.com:3007/api/category",
         {
@@ -60,6 +62,7 @@ const CategoriesData = () => {
       dispatch(setAllCategories(response?.data));
     } catch (error) {
       console.log(error);
+      setLoading(false);
     } finally {
       setLoading(false);
     }
@@ -75,32 +78,32 @@ const CategoriesData = () => {
 
       <div className="mb-5 pt-3">
         <Grid container spacing={2}>
-          <>
-            {loading ? (
-              <div className="loader w-[100%] flex justify-center items-center p-10">
-                <img className="w-[100px]" src={IMAGES.circle_preloader} alt='pic' />
-              </div>
-            ) : (
-              <>
-                {categories?.map((item, index) => (
-                  <Grid item xs={12} md={4} key={item?._id}>
-                    <div className="Category_item">
-                      {/* <Link to={`/category-details/${item?._id}`}> */}
-                      <Link to=''>
-                        <div key={images[index]?.id} className="image-item">
-                          <img
-                            src={images[index]?.src}
-                            alt={images[index]?.alt}
-                          />
-                        </div>
-                        <div className="text">{item?.title}</div>
-                      </Link>
-                    </div>
-                  </Grid>
-                ))}
-              </>
-            )}
-          </>
+          {categories?.map((item, index) => (
+            <>
+              {loader ? (
+                <Grid item md={12}>
+                  <Box>
+                    <Skeleton animation="wave" variant="text" className="w-[100%]" />
+                    <Skeleton animation="wave" variant="rectangular" className="w-[100%]" height={118} />
+                  </Box>
+                </Grid>
+              ) : (
+                <Grid item xs={12} md={4} key={item?._id}>
+                  <div className="Category_item">
+                    <Link to={`/category-details/${item?._id}`}>
+                      <div key={images[index]?.id} className="image-item">
+                        <img
+                          src={images[index]?.src}
+                          alt={images[index]?.alt}
+                        />
+                      </div>
+                      <div className="text">{item?.title}</div>
+                    </Link>
+                  </div>
+                </Grid>
+              )}
+            </>
+          ))}
         </Grid>
       </div>
     </div>

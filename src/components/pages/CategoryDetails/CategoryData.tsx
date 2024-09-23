@@ -1,21 +1,18 @@
 import { useState, useEffect } from "react";
 //import { useTranslation } from "react-i18next";
-import Grid from "@mui/material/Grid";
-import axios from "axios";
 import { useParams } from "react-router-dom";
-import IMAGES from "@assets/images/images";
 import "./CategoryData.scss";
 import { useSelector } from "react-redux";
 
 const CategoryData = () => {
   //const { t } = useTranslation();
-  const initialState = {
-    id: null,
-    title: "",
-    name: "",
-  };
+  // const initialState = {
+  //   id: null,
+  //   title: "",
+  //   name: "",
+  // };
 
-  const [category, setCategory] = useState(initialState);
+  //const [category, setCategory] = useState(initialState);
   const [books, setBooks] = useState([]);
   const { _id } = useParams();
   const { categories } = useSelector((state) => state?.categories);

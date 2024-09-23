@@ -2,23 +2,61 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { add, total } from "src/redux/CartSlice";
-import IMAGES from "@assets/images/images";
+import axios from "axios";
+//import IMAGES from "@assets/images/images";
 import "./ReleaseBookCart.scss";
+import { useEffect, useState } from "react";
 
-interface Item {
+interface Items {
   name: string;
   auther: string;
   price: number;
   LinkPath: string;
+  imagePath: string;
+  _id: string;
 }
-const ReleaseBookCart = ({ name, auther, price, LinkPath, item }: Item) => {
+const ReleaseBookCart = ({ name, auther, price, LinkPath, imagePath, item }: Items) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const [hasToken, setHasToken] = useState<boolean>(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("userToken");
+    if (token) {
+      setHasToken(true);
+    } else {
+      setHasToken(false);
+    }
+  }, []);
+
+  const addToCart = async () => {
+    dispatch(add(item));
+    dispatch(total());
+    try {
+      const response = await axios.post(
+        "https://upskilling-egypt.com:3007/api/basket/item",
+        {
+          "book": item._id,
+          "quantity":total
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+          },
+        }
+      );
+      console.log(response);
+      //setBooks(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
   return (
     <div className="book_item">
       <div className="img_holder">
-        <img src={IMAGES.book_3} alt="pic" />
+        <img src={imagePath} alt="pic" />
       </div>
       <div className="text">
         <div className="name"> {name} </div>
@@ -27,7 +65,7 @@ const ReleaseBookCart = ({ name, auther, price, LinkPath, item }: Item) => {
       </div>
       {/* <Link
         className="add_to_cart_btn"
-        to="/home/cart"
+        to="/cart"
         onClick={() => {
           window.scroll({
             top: 0,
@@ -39,16 +77,13 @@ const ReleaseBookCart = ({ name, auther, price, LinkPath, item }: Item) => {
       </Link> */}
       <div
         className="add_to_cart_btn cursor-pointer"
-        onClick={() => {
-          dispatch(add(item));
-          dispatch(total());
-        }}
+        onClick={() => addToCart()}
       >
         {t("add_to_cart")}
       </div>
       <Link
         className="see_more_btn"
-        to={LinkPath}
+        to={hasToken ? (`/product-details/${item._id}`) : ('/auth/login')}
         onClick={() => {
           window.scroll({
             top: 0,
@@ -56,7 +91,7 @@ const ReleaseBookCart = ({ name, auther, price, LinkPath, item }: Item) => {
           });
         }}
       >
-        {t("see more")}
+        {t("see_more")}
       </Link>
     </div>
   );

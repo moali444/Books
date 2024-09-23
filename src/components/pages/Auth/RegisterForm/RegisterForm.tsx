@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -12,58 +12,66 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Alert from "@mui/material/Alert";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import styles from "../AuthStyles.module.scss";
 
+interface FormData {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  role: string;
+}
+
 const RegisterForm = () => {
   const { t } = useTranslation();
-
-  //let {saveUserData} = useContext(AuthContext);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>();
 
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log(data);
     try {
-        const response = await axios.post(
-          "https://upskilling-egypt.com:3007/api/auth/register",
-          data
-        );
-        //localStorage.setItem('userToken',response.data.token);
-        //saveUserData();
-        navigate("/login");
-        toast.success(response.data.message);
-      } catch (error) {
-        toast.error(error.response.data.message, {
+      const response = await axios.post(
+        "https://upskilling-egypt.com:3007/api/auth/register",
+        data
+      );
+      navigate("/auth/login");
+      toast.success(response.data.message);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message, {
+          position: "top-center",
+        });
+      } else {
+        toast.error("An unexpected error occurred", {
           position: "top-center",
         });
       }
+    }
   };
 
   const registerNavigate = () => {
-    navigate("/login");
+    navigate("/auth/login");
   };
 
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
+  const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
 
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState<string>("");
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent<string>) => {
     setRole(event.target.value);
   };
 
@@ -86,7 +94,7 @@ const RegisterForm = () => {
                   />
                   {errors.first_name && (
                     <Alert className="mt-3" severity="error">
-                      {errors?.first_name?.message}
+                      {errors.first_name.message}
                     </Alert>
                   )}
                 </FormControl>
@@ -105,7 +113,7 @@ const RegisterForm = () => {
                   />
                   {errors.last_name && (
                     <Alert className="mt-3" severity="error">
-                      {errors?.last_name?.message}
+                      {errors.last_name.message}
                     </Alert>
                   )}
                 </FormControl>
@@ -122,14 +130,14 @@ const RegisterForm = () => {
                   {...register("email", {
                     required: "email is required",
                     pattern: {
-                      value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                      message: "please inter invalid email",
+                      value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                      message: "please enter a valid email",
                     },
                   })}
                 />
                 {errors.email && (
                   <Alert className="mt-3" severity="error">
-                    {errors?.email?.message}
+                    {errors.email.message}
                   </Alert>
                 )}
               </FormControl>
@@ -159,13 +167,13 @@ const RegisterForm = () => {
                     required: "password is required",
                     minLength: {
                       value: 7,
-                      message: "password not matching",
+                      message: "password must be at least 7 characters",
                     },
                   })}
                 />
                 {errors.password && (
                   <Alert className="mt-3" severity="error">
-                    {errors?.password?.message}
+                    {errors.password.message}
                   </Alert>
                 )}
               </FormControl>
@@ -191,7 +199,7 @@ const RegisterForm = () => {
                 </Select>
                 {errors.role && (
                   <Alert className="mt-3" severity="error">
-                    {errors?.role?.message}
+                    {errors.role.message}
                   </Alert>
                 )}
               </FormControl>

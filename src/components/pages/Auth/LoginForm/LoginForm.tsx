@@ -14,13 +14,22 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import styles from "../AuthStyles.module.scss";
 
-export default function LoginForm({ saveLoginData }) {
+interface LoginFormProps {
+  saveLoginData: () => void;
+}
+
+interface LoginFormInputs {
+  email: string;
+  password: string;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ saveLoginData }) => {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
@@ -28,9 +37,9 @@ export default function LoginForm({ saveLoginData }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<LoginFormInputs>();
 
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     try {
       const response = await axios.post(
         "https://upskilling-egypt.com:3007/api/auth/login",
@@ -38,18 +47,23 @@ export default function LoginForm({ saveLoginData }) {
       );
       navigate("/home");
       localStorage.setItem("userToken", response.data.data.accessToken);
-      //console.log(saveLoginData);
       saveLoginData();
       toast.success(response.data.message);
     } catch (error) {
-      toast.error(error.response.data.message, {
-        position: "top-center",
-      });
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message, {
+          position: "top-center",
+        });
+      } else {
+        toast.error("An unexpected error occurred", {
+          position: "top-center",
+        });
+      }
     }
   };
 
   const registerNavigate = () => {
-    navigate("/register");
+    navigate("/auth/register");
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -77,14 +91,14 @@ export default function LoginForm({ saveLoginData }) {
                   {...register("email", {
                     required: "email is required",
                     pattern: {
-                      value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                      message: "please inter invalid email",
+                      value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                      message: "please enter a valid email",
                     },
                   })}
                 />
                 {errors.email && (
                   <Alert className="mt-3" severity="error">
-                    {errors?.email?.message}
+                    {errors.email.message}
                   </Alert>
                 )}
               </FormControl>
@@ -114,13 +128,13 @@ export default function LoginForm({ saveLoginData }) {
                     required: "password is required",
                     minLength: {
                       value: 7,
-                      message: "password not matching",
+                      message: "password must be at least 7 characters long",
                     },
                   })}
                 />
                 {errors.password && (
                   <Alert className="mt-3" severity="error">
-                    {errors?.password?.message}
+                    {errors.password.message}
                   </Alert>
                 )}
               </FormControl>
@@ -141,8 +155,8 @@ export default function LoginForm({ saveLoginData }) {
                   />
                 </FormGroup>
 
-                <Link className={styles.forget_link} to="/forget-pass">
-                  forget password
+                <Link className={styles.forget_link} to="/auth/forget-pass">
+                  {t("forget_password")}
                 </Link>
               </Stack>
             </Grid>
@@ -175,3 +189,5 @@ export default function LoginForm({ saveLoginData }) {
     </>
   );
 }
+
+export default LoginForm;

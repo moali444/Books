@@ -13,8 +13,7 @@ const Footer = () => {
                 <div className='footer_item'>
                     <img className='footer_logo' src={IMAGES.footer_logo} alt='pic' />
                     <p>
-                        Nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat.
+                        {t('slider_text')}
                     </p>
                     <div className='social_icons'>
                         <Link to='/home'><img src={IMAGES.footer_facebook} /></Link>
@@ -25,7 +24,7 @@ const Footer = () => {
                 </div>
 
                 <div className='footer_item'>
-                    <h3>{t('Company')}</h3>
+                    <h3>{t('company')}</h3>
                     <ul>
                         <li><Link to='/home'>{t('home')}</Link></li>
                         <li><Link to='/home'>{t('about_us')}</Link></li>

@@ -44,6 +44,7 @@
             .social_icons{
                 display: flex;
                 gap: 20px;
+                margin-top: 15px;
                 img{
                     width: 30px;
                 }
@@ -105,5 +106,26 @@
                 }
             }
         }
+    }
+}
+
+
+/** ====================
+ *  Responsive
+=======================*/
+@media screen and (max-width: 768px) {
+    #footer_section .items{
+        flex-direction: column;
+        gap: 20px;
+    }
+    #footer_section .items .footer_item{
+        max-width: 100%;
+    }
+    #footer_section .bottom_footer ul{
+        flex-direction: column;
+        margin-top: 15px;
+    }
+    #footer_section{
+        padding: 50px;
     }
 }

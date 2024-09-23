@@ -29,29 +29,27 @@ const DealsSection = () => {
                             <div className='text'>
                                 <h3>{t('deals_title_1')} <br /> {t('deals_title_2')}</h3>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet,
-                                    libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend.
-                                    Amet, quis urna, a eu.
+                                    {t('slider_text')}
                                 </p>
                                 <div className='details_bx'>
                                     <div className='item'>
                                         <span className='num'>768</span>
-                                        <span className='data'>Days</span>
+                                        <span className='data'>{t('days')}</span>
                                     </div>
                                     
                                     <div className='item'>
                                         <span className='num'>01</span>
-                                        <span className='data'>Hour</span>
+                                        <span className='data'>{t('hour')}</span>
                                     </div>
 
                                     <div className='item'>
                                         <span className='num'>27</span>
-                                        <span className='data'>Mint</span>
+                                        <span className='data'>{t('mint')}</span>
                                     </div>
 
                                     <div className='item'>
                                         <span className='num'>55</span>
-                                        <span className='data'>Sec</span>
+                                        <span className='data'>{t('sec')}</span>
                                     </div>
                                 </div>
                             </div>
@@ -64,31 +62,29 @@ const DealsSection = () => {
                     <SwiperSlide>
                         <div className='slider_item'>
                             <div className='text'>
-                                <h3>All books are 50% off now! <br /> Don't miss such a deal!</h3>
+                                <h3>{t('deals_title_1')} <br /> {t('deals_title_2')}</h3>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet,
-                                    libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend.
-                                    Amet, quis urna, a eu.
+                                    {t('slider_text')}
                                 </p>
                                 <div className='details_bx'>
                                     <div className='item'>
                                         <span className='num'>768</span>
-                                        <span className='data'>Days</span>
+                                        <span className='data'>{t('days')}</span>
                                     </div>
                                     
                                     <div className='item'>
                                         <span className='num'>01</span>
-                                        <span className='data'>Hour</span>
+                                        <span className='data'>{t('hour')}</span>
                                     </div>
 
                                     <div className='item'>
                                         <span className='num'>27</span>
-                                        <span className='data'>Mint</span>
+                                        <span className='data'>{t('mint')}</span>
                                     </div>
 
                                     <div className='item'>
                                         <span className='num'>55</span>
-                                        <span className='data'>Sec</span>
+                                        <span className='data'>{t('sec')}</span>
                                     </div>
                                 </div>
                             </div>
@@ -101,31 +97,29 @@ const DealsSection = () => {
                     <SwiperSlide>
                         <div className='slider_item'>
                             <div className='text'>
-                                <h3>All books are 50% off now! <br /> Don't miss such a deal!</h3>
+                                <h3>{t('deals_title_1')} <br /> {t('deals_title_2')}</h3>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet,
-                                    libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend.
-                                    Amet, quis urna, a eu.
+                                    {t('slider_text')}
                                 </p>
                                 <div className='details_bx'>
                                     <div className='item'>
                                         <span className='num'>768</span>
-                                        <span className='data'>Days</span>
+                                        <span className='data'>{t('days')}</span>
                                     </div>
                                     
                                     <div className='item'>
                                         <span className='num'>01</span>
-                                        <span className='data'>Hour</span>
+                                        <span className='data'>{t('hour')}</span>
                                     </div>
 
                                     <div className='item'>
                                         <span className='num'>27</span>
-                                        <span className='data'>Mint</span>
+                                        <span className='data'>{t('mint')}</span>
                                     </div>
 
                                     <div className='item'>
                                         <span className='num'>55</span>
-                                        <span className='data'>Sec</span>
+                                        <span className='data'>{t('sec')}</span>
                                     </div>
                                 </div>
                             </div>

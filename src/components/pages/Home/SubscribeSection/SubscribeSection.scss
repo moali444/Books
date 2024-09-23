@@ -15,6 +15,7 @@
         h3{
             color: #fff;
             font-weight: 600;
+            font-size: 28px;
         }
         p{
             color: #fff;
@@ -36,14 +37,49 @@
             .form_items{
                 display: flex;
                 align-items: center;
+                .MuiFormLabel-root{
+                    &:lang(ar){
+                        left: unset;
+                        right: 0;
+                    }
+                }
             }
             .submit_btn{
                 button{
                     height: 48px;
                     border-radius: 0;
                     background-color: var(--main_orange_color);
+                    &:lang(ar){
+                        font-family: "Tajawal", sans-serif;
+                    }
                 }
             }
         }
+    }
+}
+
+
+
+/** ====================
+ *  Responsive
+=======================*/
+@media screen and (max-width: 768px) {
+    #subscribe_section .orange_bg .form_bx{
+        width: 80%;
+        position: relative;
+        inset-inline-start: unset;
+    }
+    #subscribe_section .orange_bg .form_bx .form_items{
+        flex-direction: column;
+        gap: 15px;
+    }
+    #subscribe_section .submit_btn{
+        width: 100%;
+    }
+    #subscribe_section .orange_bg{
+        padding-bottom: 0;
+    }
+    #subscribe_section .orange_bg p{
+        max-width: 80%;
     }
 }

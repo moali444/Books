@@ -19,11 +19,25 @@
             min-width: auto;
         }
     }
+    .item.relative{
+        padding-inline-end: 15px !important;
+        border-inline-end: 2px solid #E0E0E0 !important;
+        .circle{
+            inset-inline-end: 6px;
+        }
+    }
     .choose_lang{
         span{
             img{
                 width: 30px !important;
                 height: auto !important;
+            }
+        }
+    }
+    .MuiList-root{
+        li{
+            &:lang(ar){
+                font-family: "Tajawal", sans-serif !important;
             }
         }
     }
@@ -34,4 +48,11 @@
     border: 0;
     text-align: start;
     background-color: transparent;
+}
+#fade-menu{
+    li{
+        &:lang(ar){
+            font-family: "Tajawal", sans-serif !important;
+        }
+    }
 }

@@ -22,6 +22,7 @@
 
         h3 {
             font-weight: 600;
+            font-size: 24px;
             color: var(--dark_purple_color);
         }
     }
@@ -61,5 +62,19 @@
                 }
             }
         }
+    }
+}
+
+
+/** ====================
+ *  Responsive
+=======================*/
+@media screen and (max-width: 768px) {
+    #new_books_section .content_bx .view_all{
+        position: relative !important;
+    }
+    #new_books_section .content_bx .view_all a{
+        justify-content: center;
+        margin-top: 15px;
     }
 }

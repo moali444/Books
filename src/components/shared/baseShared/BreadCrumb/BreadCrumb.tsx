@@ -23,7 +23,7 @@ function BreadCrumb({ pageName }:Item) {
           </Link>
           <Link
             color="text.primary"
-            to="/home/all-products"
+            to="/all-products"
             aria-current="page"
             className="active"
           >

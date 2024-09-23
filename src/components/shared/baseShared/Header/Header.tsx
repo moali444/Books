@@ -23,7 +23,7 @@ const Header = () => {
       <div
         className={`${
           scroll ? "bg-[#e5e6dd] shadow-lg top-0" : "bg-[#fff] top-10"
-        } fixed left-0 w-full z-20`}
+        } fixed left-0 w-full z-[1024]`}
       >
         <Navbar key="xl" expand="lg" className={styles.header_menu}>
           <div className="container_bx d-flex justify-content-between w-100">

@@ -23,6 +23,7 @@ import Details from "./pages/Cart/Details/Details";
 import TotalCost from "./pages/Cart/TotalCost/TotalCost";
 import CategoryData from "./pages/CategoryDetails/CategoryData";
 import CategoriesData from "./pages/Categories/CategoriesData";
+import Items from "./pages/MyCart/Items";
 
 export {
     LanguageSwitch,
@@ -50,4 +51,5 @@ export {
     TotalCost,
     CategoryData,
     CategoriesData,
+    Items,
 }

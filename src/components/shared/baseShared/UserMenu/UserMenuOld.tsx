@@ -31,7 +31,7 @@ const UserMenu = () => {
 
   const logout = () => {
     window.localStorage.clear();
-    navigate("/login");
+    navigate("/auth/login");
   };
 
   return (

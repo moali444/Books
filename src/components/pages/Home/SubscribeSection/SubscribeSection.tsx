@@ -1,31 +1,32 @@
 import { useTranslation } from "react-i18next";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
-import FilledInput from "@mui/material/FilledInput";
 import Alert from "@mui/material/Alert";
 import { TextField } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import "./SubscribeSection.scss";
+
+interface FormInputs {
+  email: string;
+}
 
 const SubscribeSection = () => {
   const { t } = useTranslation();
 
-  //   interface Item{
-  //     data: string,
-  //   }
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FormInputs> = (data) => {
     console.log(data);
   };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormInputs>();
 
   return (
     <section id="subscribe_section" className="container_bx">
       <div className="orange_bg">
-        <h3> {t("subscribe_section_title")} </h3>
+        <h3>{t("subscribe_section_title")}</h3>
         <p>{t("subscribe_section_desc")}</p>
 
         <div className="form_bx">
@@ -37,16 +38,16 @@ const SubscribeSection = () => {
                   label="youremail123@gmail.com"
                   variant="standard"
                   {...register("email", {
-                    required: "email is required",
+                    required: "Email is required",
                     pattern: {
-                      value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                      message: "please inter invalid email",
+                      value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                      message: "Please enter a valid email",
                     },
                   })}
                 />
                 {errors.email && (
                   <Alert className="mt-3" severity="error">
-                    {errors?.email?.message}
+                    {errors.email.message}
                   </Alert>
                 )}
               </FormControl>

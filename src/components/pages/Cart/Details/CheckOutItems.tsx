@@ -3,9 +3,20 @@ import { increase, decrease, remove, total } from "../../../../redux/CartSlice";
 import { useDispatch } from "react-redux";
 import IMAGES from "@assets/images/images";
 
-const CheckOutItems = ({ cartItem }) => {
+interface CartItem {
+  price: number;
+  amount: number;
+  name: string;
+}
+
+interface CheckOutItemsProps {
+  cartItem: CartItem;
+}
+
+const CheckOutItems: React.FC<CheckOutItemsProps> = ({ cartItem }) => {
   const dispatch = useDispatch();
   const { price, amount, name } = cartItem;
+  console.log("price api", price);
 
   return (
     <div className="flex justify-between items-center border border-solid border-red-300 p-4 mb-6">

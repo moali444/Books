@@ -22,7 +22,7 @@ const LatestArticleSection = () => {
           <LatestBookCart
             article_img={IMAGES.latest_book_1}
             article_date={"2 aug, 2021"}
-            article_name={"Reading books always makes the moments happy"}
+            article_name={t('article_desc')}
           />
         </Grid>
 
@@ -30,7 +30,7 @@ const LatestArticleSection = () => {
           <LatestBookCart
             article_img={IMAGES.latest_book_2}
             article_date={"2 aug, 2021"}
-            article_name={"Reading books always makes the moments happy"}
+            article_name={t('article_desc')}
           />
         </Grid>
 
@@ -38,14 +38,14 @@ const LatestArticleSection = () => {
           <LatestBookCart
             article_img={IMAGES.latest_book_3}
             article_date={"2 aug, 2021"}
-            article_name={"Reading books always makes the moments happy"}
+            article_name={t('article_desc')}
           />
         </Grid>
       </Grid>
 
       <div className="more_btn">
         <Link to="/home">
-          read all articles <img src={IMAGES.rightArrow} alt="pic" />
+          {t('read_all_articles')} <img src={IMAGES.rightArrow} alt="pic" />
         </Link>
       </div>
     </section>
