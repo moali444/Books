@@ -10,9 +10,9 @@ const IMAGES = {
     userIcon : new URL('./svg/user-icon.svg', import.meta.url).href,
     cartIcon : new URL('./svg/cart-icon.svg', import.meta.url).href,
     favIcon : new URL('./svg/fav-icon.svg', import.meta.url).href,
-    book_1 : new URL('./svg/books/book-1.svg', import.meta.url).href,
-    book_2 : new URL('./svg/books/book-2.svg', import.meta.url).href,
-    book_3 : new URL('./svg/books/book-3.svg', import.meta.url).href,
+    book_1 : new URL('./png/books/book1.png', import.meta.url).href,
+    book_2 : new URL('./png/books/book2.png', import.meta.url).href,
+    book_3 : new URL('./png/books/book3.png', import.meta.url).href,
     book_4 : new URL('./svg/books/book-4.svg', import.meta.url).href,
     featured_book : new URL('./svg/books/featured-book.svg', import.meta.url).href,
     rightArrow : new URL('./svg/right-arrow.svg', import.meta.url).href,
@@ -27,6 +27,7 @@ const IMAGES = {
     grid_icon : new URL('./svg/icons/grid-icon.svg', import.meta.url).href,
     list_icon : new URL('./svg/icons/list-icon.svg', import.meta.url).href,
     shopping_cart : new URL('./svg/shopping-cart.svg', import.meta.url).href,
+    empty : new URL('./svg/empty.svg', import.meta.url).href,
 
     category_1 : new URL('./png/category-1.png', import.meta.url).href,
     category_2 : new URL('./png/category-2.png', import.meta.url).href,
@@ -40,6 +41,9 @@ const IMAGES = {
     latest_book_1 : new URL('./png/latest/latest-1.png', import.meta.url).href,
     latest_book_2 : new URL('./png/latest/latest-2.png', import.meta.url).href,
     latest_book_3 : new URL('./png/latest/latest-3.png', import.meta.url).href,
+
+    loader_gif : new URL('./png/loader.gif', import.meta.url).href,
+    circle_preloader : new URL('./png/circle-preloader.gif', import.meta.url).href,
 }
 
 export default IMAGES
